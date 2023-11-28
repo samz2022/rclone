@@ -2,3 +2,8 @@
 // their implementation these can't be imported by the VFS so need to
 // be mentioned in here, not backend/all.
 package all
+
+import (
+	// Active file systems
+	_ "github.com/rclone/rclone/backend/archive"
+)
