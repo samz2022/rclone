@@ -555,6 +555,12 @@ var ConfigOptionsInfo = Options{{
 	Default: []string{},
 	Help:    "Transform paths during the copy process.",
 	Groups:  "Copy",
+}, {
+	Name:     "assume_listings_sorted",
+	Default:  false,
+	Advanced: true,
+	Help:     "If set will not sort listings. If listings aren't sorted the sync may go wrong.",
+	Groups:   "Copy",
 }}
 
 // ConfigInfo is filesystem config options
@@ -667,6 +673,7 @@ type ConfigInfo struct {
 	MetadataMapper             SpaceSepList      `config:"metadata_mapper"`
 	MaxConnections             int               `config:"max_connections"`
 	NameTransform              []string          `config:"name_transform"`
+	AssumeListingsSorted       bool              `config:"assume_listings_sorted"`
 }
 
 func init() {

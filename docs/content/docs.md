@@ -659,6 +659,30 @@ However, a suffix of `B` for Byte, `K` for KiB, `M` for MiB,
 `G` for GiB, `T` for TiB and `P` for PiB may be used. These are
 the binary units, e.g. 1, 2\*\*10, 2\*\*20, 2\*\*30 respectively.
 
+### --assume-listings-sorted
+
+This flag can be used when the source and destination backends are
+guaranteed to return the items in the same sorted order and in that
+case it will speed up the sync.
+
+Not all backends are guaranteed to return sorted entries (eg local)
+but s3 should, so an s3 to s3 sync could benefit from this flag.
+
+If rclone finds an out of order directory entry then it will cancel
+the sync with the error:
+
+    out of order listing in source (remote:dir)
+
+In this case you should remove the `--assume-listings-sorted` flag.
+
+If you are using `--assume-listings-sorted` then rclone will assume
+`--no-unicode-normalization` and it will compare file names in a case
+sensitive way.
+
+Normally sorting directory entries is not a bottleneck, but it can
+become so with syncs of millions of items in a single directory as the
+sync will not start until the directory listing is complete.
+
 ### --backup-dir=DIR ###
 
 When using `sync`, `copy` or `move` any files which would have been
