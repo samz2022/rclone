@@ -929,12 +929,12 @@ func getOAuthClient(ctx context.Context, name string, m configmap.Mapper) (oAuth
 			oauthConfig.AuthURL = tokenURL
 		}
 	} else if ver == legacyConfigVersion {
-		clientID, ok := m.Get(configClientID)
-		if !ok {
+		clientID, _ := m.Get(configClientID)
+		if clientID == "" {
 			clientID = legacyClientID
 		}
-		clientSecret, ok := m.Get(configClientSecret)
-		if !ok {
+		clientSecret, _ := m.Get(configClientSecret)
+		if clientSecret == "" {
 			clientSecret = legacyEncryptedClientSecret
 		}
 		oauthConfig.ClientID = clientID
