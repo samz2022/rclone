@@ -75,6 +75,24 @@ const (
 	whitelabelOnlimeDomain = "cloud-auth.onlime.dk"
 	whitelabelOnlimeRealm  = "onlime_wl"
 
+	whitelabelElkjopDomain = "cloud.elkjop.no"
+	whitelabelElkjopRealm  = "elkjop"
+
+	whitelabelElgigantenSeDomain = "cloud.elgiganten.se"
+	whitelabelElgigantenSeRealm  = "elgiganten"
+
+	whitelabelElgigantenDkDomain = "cloud.elgiganten.dk"
+	whitelabelElgigantenDkRealm  = "elgiganten"
+
+	whitelabelGiganttiDomain = "cloud.gigantti.fi"
+	whitelabelGiganttiRealm  = "gigantti"
+
+	whitelabelElkoDomain = "cloud.elko.si"
+	whitelabelElkoRealm  = "elko"
+
+	whitelabelLetsgoDomain = "letsgo.jotta.cloud"
+	whitelabelLetsgoRealm  = "letsgo"
+
 	legacyTokenURL              = "https://api.jottacloud.com/auth/v1/token"
 	legacyRegisterURL           = "https://api.jottacloud.com/auth/v1/register"
 	legacyClientID              = "nibfk8biu12ju7hpqomr8b1e40"
@@ -165,10 +183,10 @@ func Config(ctx context.Context, name string, m configmap.Mapper, config fs.Conf
 			Help:  "Standard authentication.\nUse this if you're a normal Jottacloud user.",
 		}, {
 			Value: "whitelabel",
-			Help:  "Whitelabel authentication.\nUse this if you are using Telia Cloud (Sweden), Telia Sky (Norway), Tele2 Cloud or Onlime Cloud.",
+			Help:  "Whitelabel authentication.\nUse this if you are using the service offered by a third party such as Telia, Tele2, Onlime, Elkjøp, etc.",
 		}, {
 			Value: "legacy",
-			Help:  "Legacy authentication.\nThis is only required for certain whitelabel versions of Jottacloud and not recommended for normal users.",
+			Help:  "Legacy authentication.\nThis is no longer supported by any known services and not recommended for normal users.",
 		}})
 	case "auth_type_done":
 		// Jump to next state according to config chosen
@@ -201,10 +219,28 @@ func Config(ctx context.Context, name string, m configmap.Mapper, config fs.Conf
 			Help:  "Telia Sky authentication.\nUse this if you are using Telia Sky (Norway).",
 		}, {
 			Value: "tele2",
-			Help:  "Tele2 Cloud authentication.\nUse this if you are using Tele2 Cloud.",
+			Help:  "Tele2 Cloud authentication.\nUse this if you are using Tele2 Cloud (Sweden).",
 		}, {
 			Value: "onlime",
-			Help:  "Onlime Cloud authentication.\nUse this if you are using Onlime Cloud.",
+			Help:  "Onlime Cloud authentication.\nUse this if you are using Onlime Cloud (Denmark).",
+		}, {
+			Value: "elkjop",
+			Help:  "Elkjøp Cloud authentication.\nUse this if you are using Elkjøp Cloud (Norway).",
+		}, {
+			Value: "elgiganten_se",
+			Help:  "Elgiganten Cloud authentication.\nUse this if you are using Elgiganten Cloud (Sweden).",
+		}, {
+			Value: "elgiganten_dk",
+			Help:  "Elgiganten Cloud authentication.\nUse this if you are using Elgiganten Cloud (Denmark).",
+		}, {
+			Value: "gigantti",
+			Help:  "Gigantti Cloud authentication.\nUse this if you are using Gigantti Cloud (Finland).",
+		}, {
+			Value: "elko",
+			Help:  "ELKO Cloud authentication.\nUse this if you are using ELKO Cloud (Iceland).",
+		}, {
+			Value: "letsgo",
+			Help:  "Let's Go Cloud authentication.\nUse this if you are using Let's Go Cloud (Germany).",
 		}})
 	case "whitelabel_type_done":
 		var domain, realm string
@@ -221,6 +257,24 @@ func Config(ctx context.Context, name string, m configmap.Mapper, config fs.Conf
 		case "onlime":
 			domain = whitelabelOnlimeDomain
 			realm = whitelabelOnlimeRealm
+		case "elkjop":
+			domain = whitelabelElkjopDomain
+			realm = whitelabelElkjopRealm
+		case "elgiganten_se":
+			domain = whitelabelElgigantenSeDomain
+			realm = whitelabelElgigantenSeRealm
+		case "elgiganten_dk":
+			domain = whitelabelElgigantenDkDomain
+			realm = whitelabelElgigantenDkRealm
+		case "gigantti":
+			domain = whitelabelGiganttiDomain
+			realm = whitelabelGiganttiRealm
+		case "elko":
+			domain = whitelabelElkoDomain
+			realm = whitelabelElkoRealm
+		case "letsgo":
+			domain = whitelabelLetsgoDomain
+			realm = whitelabelLetsgoRealm
 		}
 		opts := rest.Opts{
 			Method:  "GET",
